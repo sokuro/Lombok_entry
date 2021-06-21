@@ -15,6 +15,8 @@ import com.example.request.CreateStudentRequest;
 import com.example.response.StudentResponse;
 import com.example.service.StudentService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/student/")
 public class StudentController {
@@ -35,7 +37,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("create")
-	public StudentResponse createStudent (@RequestBody CreateStudentRequest createStudentRequest) {
+	public StudentResponse createStudent (@Valid @RequestBody CreateStudentRequest createStudentRequest) {
 		Student student = studentService.createStudent(createStudentRequest);
 		
 		return new StudentResponse(student);
