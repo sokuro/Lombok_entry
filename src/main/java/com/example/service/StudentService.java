@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,9 @@ public class StudentService {
 	public List<Student> getByFirstNameOrLastName(String firstName, String lastName) {
 		return studentRepository.findByFirstNameOrLastName(firstName, lastName);
 	}
+
+	public List<Student> getByFirstNameIn (InQueryRequest inQueryRequest) {
+		return studentRepository.findByFirstNameIn(inQueryRequest.getFirstNames());
+	}
+
 }

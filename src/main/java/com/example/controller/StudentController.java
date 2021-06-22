@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,18 @@ public class StudentController {
 	public List<StudentResponse> getByFirstNameOrLastName (@PathVariable String firstName,
 														   @PathVariable String lastName) {
 		List<Student> studentList = studentService.getByFirstNameOrLastName(firstName, lastName);
+
+		List<StudentResponse> studentResponseList = new ArrayList<>();
+
+		studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+
+		return studentResponseList;
+	}
+
+	@GetMapping("getByFirstNameIn")
+	public List<StudentResponse> getByFirstNameIn (
+			@RequestBody InQueryRequest inQueryRequest) {
+		List<Student> studentList = studentService.getByFirstNameIn(inQueryRequest);
 
 		List<StudentResponse> studentResponseList = new ArrayList<>();
 
