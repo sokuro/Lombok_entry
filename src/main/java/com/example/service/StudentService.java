@@ -80,4 +80,8 @@ public class StudentService {
 		return studentRepository.findByFirstNameContains(firstName);
 	}
 
+	public List<Student> startsWith(String firstName) {
+		return studentRepository.findByFirstNameStartsWith(firstName);
+	}
+
 }
