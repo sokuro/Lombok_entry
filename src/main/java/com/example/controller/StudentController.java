@@ -24,7 +24,7 @@ public class StudentController {
 	@GetMapping("getAll")
 	public List<StudentResponse> getAllStudents () {
 		List<Student> studentList = studentService.getAllStudents();
-		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		List<StudentResponse> studentResponseList = new ArrayList<>();
 		
 		studentList.stream().forEach(student -> {
 			studentResponseList.add(new StudentResponse(student));
@@ -50,5 +50,16 @@ public class StudentController {
 	@DeleteMapping("delete/{id}")
 	public String deleteStudent (@PathVariable long id) {
 		return studentService.deleteStudent(id);
+	}
+
+	@GetMapping("getByFirstName/{firstName}")
+	public List<StudentResponse> getByFirstName (@PathVariable String firstName) {
+		List<Student> studentList = studentService.getByFirstName(firstName);
+
+		List<StudentResponse> studentResponseList = new ArrayList<>();
+
+		studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+
+		return studentResponseList;
 	}
 }
