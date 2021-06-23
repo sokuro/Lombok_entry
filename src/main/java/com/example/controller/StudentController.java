@@ -144,4 +144,20 @@ public class StudentController {
 		return studentResponseList;
 	}
 
+	@GetMapping("getByFirstNameAndLastNameByJPQL/{firstName}/{lastName}")
+	public StudentResponse getByFirstNameAndLastNameByJPQL (@PathVariable String firstName,
+													  @PathVariable String lastName) {
+		return new StudentResponse(studentService.getByFirstNameAndLastNameByJPQL(firstName, lastName));
+	}
+
+	@PutMapping("updateFirstName/{id}/{firstName}")
+	public String updateStudentWithJpql (@PathVariable Long id, @PathVariable String firstName) {
+		return studentService.updateStudentWithJpql(id, firstName)+ " Student(s) updated";
+	}
+
+	@DeleteMapping("deleteByFirstName/{firstName}")
+	public String deleteStudent (@PathVariable String firstName) {
+		return studentService.deleteStudent(firstName) + " Student(s) deleted";
+	}
+
 }
