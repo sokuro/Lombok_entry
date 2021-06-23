@@ -2,6 +2,8 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.entity.Address;
+import com.example.repository.AddressRepository;
 import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class StudentService {
 
 	@Autowired
 	StudentRepository studentRepository;
+
+	@Autowired
+	AddressRepository addressRepository;
 	
 	public List<Student> getAllStudents () {
 		return studentRepository.findAll();
@@ -26,7 +31,14 @@ public class StudentService {
 	
 	public Student createStudent (CreateStudentRequest createStudentRequest) {
 		Student student = new Student(createStudentRequest);
-		
+
+		Address address = new Address();
+		address.setStreet(createStudentRequest.getStreet());
+		address.setCity(createStudentRequest.getCity());
+
+		address = addressRepository.save(address);
+
+		student.setAddress(address);
 		student = studentRepository.save(student);
 		return student;
 	}
