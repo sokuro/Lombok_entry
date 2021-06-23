@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -39,4 +40,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("Delete From Student where firstName = :firstName")
     Integer deleteByFirstName (String firstName);
 
+    List<Student> getByAddressCity(String city);
 }
