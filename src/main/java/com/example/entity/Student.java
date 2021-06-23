@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,6 +37,9 @@ public class Student {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "address_id")
 	private Address address;
+
+	@OneToMany(mappedBy = "student")
+	private List<Subject> learningSubjects;
 
 	public Student (CreateStudentRequest createStudentRequest) {
 		this.firstName = createStudentRequest.getFirstName();
