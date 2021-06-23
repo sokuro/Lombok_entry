@@ -1,11 +1,6 @@
 package com.example.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +21,8 @@ public class Address {
 
 	@Column(name = "city")
 	private String city;
+
+	@OneToOne(mappedBy = "address")
+	private Student student;
 
 }
